@@ -30,7 +30,8 @@ int porovnanie(char *vstup, char *adresa){
 }
 int main(int argc, char *argv[]){
     char buffer[102];
-    char vypis[102];
+    //char vypis[102];
+    char ascii[128] = {0};
     char single[102];
     int poradie = 0;
     int prepis = 0;
@@ -45,17 +46,18 @@ int main(int argc, char *argv[]){
             if (stav == 1)
             {
                 break;
-            } else if (stav>='A' && stav<='Z')      
+            } else if (stav>1)//(stav>='A' && stav<='Z')      
             {
                 for (prepis = 0; prepis < 102 && buffer[prepis] != '\0'; prepis++) {
                     single[prepis] = zvacsi(buffer[prepis]);
                 }
                 single[prepis] = '\0';
-                vypis[poradie] = stav;
+                //vypis[poradie] = stav;
+                ascii[stav] = 1;
                 poradie++;
             }
         }
-        vypis[poradie] = '\0';
+        //vypis[poradie] = '\0';
         //printf("poradie %d",poradie);
         if(stav ==1){
             for (int i = 0; buffer[i] != '\0'; i++)
@@ -67,7 +69,14 @@ int main(int argc, char *argv[]){
         } else if(poradie == 1){
             printf("Found: %s",single);
         } else if (poradie > 1){
-            printf("Enable: %s",vypis);
+            printf("Enable: ");
+            for (int i = 0; i < 127; i++)
+            {
+                if(ascii[i] == 1){
+                    printf("%c",i);
+                }
+            }
+            
         } else {
             printf("Not found");
         }   
