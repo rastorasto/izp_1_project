@@ -19,7 +19,7 @@ int porovnanie(char *vstup, char *adresa){
             znak++;
         }
     }
-    printf("%d\n",adresa[znak]);
+    printf("stav hore %d\n",adresa[znak]);
     if(rovnost && (adresa[znak] == '\0' || adresa[znak] == '\n')){
         return 1;
     } else if(rovnost == 1){
@@ -29,9 +29,11 @@ int porovnanie(char *vstup, char *adresa){
     }
 }
 int main(int argc, char *argv[]){
-    char buffer[101];
-    char vypis[101];
+    char buffer[102];
+    char vypis[102];
+    char single[102];
     int poradie = 0;
+    int prepis = 0;
     int stav;
     if(!argv[1]){
         argv[1] = "\0";
@@ -39,19 +41,27 @@ int main(int argc, char *argv[]){
     if(argc > 1){
         while(fgets(buffer,101,stdin) != NULL){
         stav = porovnanie(argv[1],buffer);
+        printf("stav dole %d\n",stav);
             if (stav == 1)
             {
                 break;
             } else if (stav>='A' && stav<='Z')      
             {
+                for (prepis = 0; prepis < 102 && buffer[prepis] != '\0'; prepis++) {
+                    single[prepis] = buffer[prepis];
+                }
+                single[prepis] = '\0';
                 vypis[poradie] = stav;
                 poradie++;
             }
         }
         vypis[poradie] = '\0';
+        printf("poradie %d",poradie);
         if(stav ==1){
             printf("Found:%s",buffer);
-        } else if (poradie != 0){
+        } else if(poradie == 1){
+            printf("Found: %s",single);
+        } else if (poradie > 1){
             printf("Enable: %s",vypis);
         } else {
             printf("Not found");
