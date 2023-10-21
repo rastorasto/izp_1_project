@@ -19,7 +19,7 @@ int porovnanie(char *vstup, char *adresa){
             znak++;
         }
     }
-    printf("stav hore %d\n",adresa[znak]);
+    //printf("stav hore %d\n",adresa[znak]);
     if(rovnost && (adresa[znak] == '\0' || adresa[znak] == '\n')){
         return 1;
     } else if(rovnost == 1){
@@ -41,14 +41,14 @@ int main(int argc, char *argv[]){
     if(argc > 1){
         while(fgets(buffer,101,stdin) != NULL){
         stav = porovnanie(argv[1],buffer);
-        printf("stav dole %d\n",stav);
+        //printf("stav dole %d\n",stav);
             if (stav == 1)
             {
                 break;
             } else if (stav>='A' && stav<='Z')      
             {
                 for (prepis = 0; prepis < 102 && buffer[prepis] != '\0'; prepis++) {
-                    single[prepis] = buffer[prepis];
+                    single[prepis] = zvacsi(buffer[prepis]);
                 }
                 single[prepis] = '\0';
                 vypis[poradie] = stav;
@@ -56,9 +56,14 @@ int main(int argc, char *argv[]){
             }
         }
         vypis[poradie] = '\0';
-        printf("poradie %d",poradie);
+        //printf("poradie %d",poradie);
         if(stav ==1){
-            printf("Found:%s",buffer);
+            for (int i = 0; buffer[i] != '\0'; i++)
+            {
+                buffer[i] = zvacsi(buffer[i]);
+            }
+            
+            printf("Found: %s",buffer);
         } else if(poradie == 1){
             printf("Found: %s",single);
         } else if (poradie > 1){
