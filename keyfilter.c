@@ -4,7 +4,10 @@
 
 #define max_array_length 102
 #define ascii_table_length 128
-
+/*
+Checks the argument's ASCII value and if it is lowercase letter
+it will change it to its uppercase value.
+*/
 int uppercase(int letter){
     if (letter >= 'a' && letter <= 'z') {
         return letter - ('a' - 'A');
@@ -12,17 +15,22 @@ int uppercase(int letter){
         return letter;
     }
 }
-// Function to compare each character from input with address
+/*
+Compares every character from input with address.
+If every character from input matches characters from address,
+the function returns the next character in address.
+If they aren't the same the cycle that checks every letter from input stops
+and the fucntion returns 0.
+*/
 int comparison(char *input, char *address){
-    int char_index = 0; // Character index for array
+    int char_index = 0;
     bool strings_are_the_same = true;
-    while (input[char_index] != '\0') { // Compare while there are valid characters
-        // Comparing characters at char_index
+    while (input[char_index] != '\0') {
         if(uppercase(input[char_index]) != uppercase(address[char_index])){
             strings_are_the_same = false;
-            break;  // If they aren't the same we don't need to compare next characters
+            break;
         } else {
-            char_index++; // Move to next character
+            char_index++;
         }
     }
     if(strings_are_the_same){
@@ -31,6 +39,13 @@ int comparison(char *input, char *address){
         return 0;
     }
 }
+/*
+The function checks how many addresses are valid.
+If it is only one address, the function prints the address.
+If more addresses are valid, the funcion prints the next letters
+that the user can add to his input. And if no addresses are valid,
+the function prints "Not found".
+*/
 void output_results(int found_index,char* found_address,char* ascii_table){
     if(found_index == 1){
         printf("Found: %s",found_address);
@@ -46,32 +61,48 @@ void output_results(int found_index,char* found_address,char* ascii_table){
         printf("Not found");
     }
 }
+/*
+The function checks it user passed an arguement, and if
+they didn't, it will set it to space.
+*/
 int check_arguments(int argc, char *argv[]){
     if(!argv[1]){
-        argv[1] = "\0";
+        argv[1] = " ";
         argc++;
     }
     return argc;
 }
+/*
+This function is used to save found address in case
+that only one address is valid.
+*/
+char* saves_valid_address(char *buffer, char *found_address){
+    int found_address_index;
+    for (found_address_index = 0; buffer[found_address_index] != '\0'; found_address_index++) {
+        found_address[found_address_index] = uppercase(buffer[found_address_index]);
+    }
+    found_address[found_address_index] = '\0';
+    return found_address;
+}
+/*
+The function calls comparison function for every address from stdin.
+If the address is valid it saves it and it also saves next enabled letter.
+After comparing every address it prints the results. 
+*/
 int main(int argc, char *argv[]){
     char buffer[max_array_length];
     char ascii_table[128] = {0};
     char found_address[max_array_length];
     int found_index = 0;
-    int found_address_index = 0;
     int comparison_value = 0;
     check_arguments(argc, argv);
     if(argc){
         while(fgets(buffer,101,stdin) != NULL){
-        comparison_value = comparison(argv[1],buffer);
-        if (comparison_value)   
-            {
-                for (found_address_index = 0; buffer[found_address_index] != '\0'; found_address_index++) {
-                    found_address[found_address_index] = uppercase(buffer[found_address_index]);
-                }
-                found_address[found_address_index] = '\0';
-                ascii_table[comparison_value] = 1;
+            comparison_value = comparison(argv[1],buffer);
+            if (comparison_value){
+                saves_valid_address(buffer,found_address);
                 found_index++;
+                ascii_table[comparison_value] = 1;
             }
         }
 
