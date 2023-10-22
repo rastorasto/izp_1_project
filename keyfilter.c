@@ -25,10 +25,11 @@ int comparison(char *input, char *address){
         return 0;
     }
 }
+#define max_array_length 102
 int main(int argc, char *argv[]){
-    char buffer[102];
+    char buffer[max_array_length];
     char ascii[128] = {0};
-    char found_address[102];
+    char found_address[max_array_length];
     int found_index = 0;
     int found_address_index = 0;
     int comparison_value = 0;
@@ -39,9 +40,9 @@ int main(int argc, char *argv[]){
     if(argc > 1){
         while(fgets(buffer,101,stdin) != NULL){
         comparison_value = comparison(argv[1],buffer);
-        if (comparison_value>1)   
+        if (comparison_value)   
             {
-                for (found_address_index = 0; found_address_index < 102 && buffer[found_address_index] != '\0'; found_address_index++) {
+                for (found_address_index = 0; buffer[found_address_index] != '\0'; found_address_index++) {
                     found_address[found_address_index] = uppercase(buffer[found_address_index]);
                 }
                 found_address[found_address_index] = '\0';
