@@ -38,6 +38,7 @@ int main(int argc, char *argv[]){
     int stav;
     if(!argv[1]){
         argv[1] = "\0";
+        argc++;
     }
     if(argc > 1){
         while(fgets(buffer,101,stdin) != NULL){
