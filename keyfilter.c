@@ -5,7 +5,7 @@
 #define max_array_length 102
 #define ascii_table_length 128
 /*
-Checks the argument's ASCII value and if it is lowercase letter
+The function checks the argument's ASCII value and if it is lowercase letter
 it will change it to its uppercase value.
 */
 int uppercase(int letter){
@@ -16,7 +16,7 @@ int uppercase(int letter){
     }
 }
 /*
-Compares every character from input with address.
+The function compares every character from input with address.
 If every character from input matches characters from address,
 the function returns the next character in address.
 If they aren't the same the cycle that checks every letter from input stops
@@ -63,17 +63,17 @@ void output_results(int found_index,char* found_address,char* ascii_table){
 }
 /*
 The function checks it user passed an arguement, and if
-they didn't, it will set it to space.
+they didn't, it will set it to empty string.
 */
 int check_arguments(int argc, char *argv[]){
     if(!argv[1]){
-        argv[1] = " ";
+        argv[1] = "";
         argc++;
     }
     return argc;
 }
 /*
-This function is used to save found address in case
+The function is used to save found address in case
 that only one address is valid.
 */
 char* saves_valid_address(char *buffer, char *found_address){
