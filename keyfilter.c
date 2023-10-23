@@ -51,8 +51,7 @@ void output_results(int found_index,char* found_address,bool* ascii_table){
         printf("Found: %s",found_address);
     } else if (found_index > 1){
         printf("Enable: ");
-        for (int i = 0; i < ascii_table_length; i++)
-        {
+        for (int i = 0; i < ascii_table_length; i++){
             if(ascii_table[i] == 1){
                 printf("%c",i);
             }
@@ -66,9 +65,18 @@ The function checks it user passed an arguement, and if
 they didn't, it will set it to empty string.
 */
 int check_arguments(int argc, char *argv[]){
+    int length_of_argument = 0;
     if(!argv[1]){
         argv[1] = "";
         argc++;
+    } else {
+        while (argv[1][length_of_argument]!='\0'){
+            length_of_argument++;
+        }
+        if(length_of_argument>100){
+            fprintf(stderr,"Input exceeds the maximum allowed length of 100 characters.");
+            exit(1);
+        }
     }
     return argc;
 }
