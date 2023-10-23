@@ -62,7 +62,8 @@ void output_results(int found_index,char* found_address,bool* ascii_table){
 }
 /*
 The function checks it user passed an arguement, and if
-they didn't, it will set it to empty string.
+they didn't, it will set it to empty string. It also checks
+it the user exceeded allowed length of agrument.
 */
 int check_arguments(int argc, char *argv[]){
     int length_of_argument = 0;
@@ -74,8 +75,7 @@ int check_arguments(int argc, char *argv[]){
             length_of_argument++;
         }
         if(length_of_argument>100){
-            fprintf(stderr,"Input exceeds the maximum allowed length of 100 characters.");
-            exit(1);
+            return 1;
         }
     }
     return argc;
@@ -103,7 +103,10 @@ int main(int argc, char *argv[]){
     char found_address[max_array_length];
     int found_index = 0;
     int comparison_value = 0;
-    check_arguments(argc, argv);
+    if(check_arguments(argc, argv)==1){
+        fprintf(stderr,"Input exceeds the maximum allowed length of 100 characters.");
+        return 1;
+    }
     if(argc){
         while(fgets(buffer,101,stdin) != NULL){
             comparison_value = comparison(argv[1],buffer);
