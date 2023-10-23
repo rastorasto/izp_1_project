@@ -107,21 +107,14 @@ int main(int argc, char *argv[]){
         fprintf(stderr,"Input exceeds the maximum allowed length of 100 characters.");
         return 1;
     }
-    if(argc){
-        while(fgets(buffer,101,stdin) != NULL){
-            comparison_value = comparison(argv[1],buffer);
-            if (comparison_value){
-                saves_valid_address(buffer,found_address);
-                found_index++;
-                ascii_table[comparison_value] = 1;
-            }
+    while(fgets(buffer,101,stdin) != NULL){
+        comparison_value = comparison(argv[1],buffer);
+        if (comparison_value){
+            saves_valid_address(buffer,found_address);
+            found_index++;
+            ascii_table[comparison_value] = 1;
         }
-
+        }
     output_results(found_index,found_address,ascii_table);
-
-    } else {
-        fprintf(stderr,"No input");
-        return 1;
-    }
     return 0;
 }
