@@ -110,6 +110,7 @@ int main(int argc, char *argv[]){
 
     } else {
         fprintf(stderr,"No input");
+        return 1;
     }
     return 0;
 }
