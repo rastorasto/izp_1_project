@@ -46,7 +46,7 @@ If more addresses are valid, the funcion prints the next letters
 that the user can add to his input. And if no addresses are valid,
 the function prints "Not found".
 */
-void output_results(int found_index,char* found_address,char* ascii_table){
+void output_results(int found_index,char* found_address,bool* ascii_table){
     if(found_index == 1){
         printf("Found: %s",found_address);
     } else if (found_index > 1){
@@ -91,7 +91,7 @@ After comparing every address it prints the results.
 */
 int main(int argc, char *argv[]){
     char buffer[max_array_length];
-    char ascii_table[128] = {0};
+    bool ascii_table[128] = {0};
     char found_address[max_array_length];
     int found_index = 0;
     int comparison_value = 0;
