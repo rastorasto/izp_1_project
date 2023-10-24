@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<stdbool.h>
 
-#define max_array_length 102
+#define max_array_length 502
 #define ascii_table_length 128
 /*
 The function checks the argument's ASCII value and if it is lowercase letter
@@ -61,7 +61,7 @@ void output_results(int found_index,char* found_address,bool* ascii_table){
     }
 }
 /*
-The function checks it user passed an arguement, and if
+The function checks if user passed an arguement, and if
 they didn't, it will set it to empty string. It also checks
 it the user exceeded allowed length of agrument.
 */
@@ -107,7 +107,7 @@ int main(int argc, char *argv[]){
         fprintf(stderr,"Input exceeds the maximum allowed length of 100 characters.");
         return 1;
     }
-    while(fgets(buffer,101,stdin) != NULL){
+    while(fgets(buffer,501,stdin) != NULL){
         comparison_value = comparison(argv[1],buffer);
         if (comparison_value){
             saves_valid_address(buffer,found_address);
