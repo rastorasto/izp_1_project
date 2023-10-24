@@ -63,7 +63,7 @@ void output_results(int found_index,char* found_address,bool* ascii_table){
 /*
 The function checks if user passed an arguement, and if
 they didn't, it will set it to empty string. It also checks
-it the user exceeded allowed length of agrument.
+if the user exceeded allowed length of agrument.
 */
 int check_arguments(int argc, char *argv[]){
     int length_of_argument = 0;
