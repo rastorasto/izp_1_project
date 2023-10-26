@@ -99,7 +99,7 @@ After comparing every address it prints the results.
 */
 int main(int argc, char *argv[]){
     char buffer[max_array_length];
-    bool ascii_table[128] = {0};
+    bool ascii_table[ascii_table_length] = {0};
     char found_address[max_array_length];
     int found_index = 0;
     int comparison_value = 0;
@@ -107,7 +107,7 @@ int main(int argc, char *argv[]){
         fprintf(stderr,"Input exceeds the maximum allowed length of 100 characters.");
         return 1;
     }
-    while(fgets(buffer,501,stdin) != NULL){
+    while(fgets(buffer,max_array_length,stdin) != NULL){
         comparison_value = comparison(argv[1],buffer);
         if (comparison_value){
             saves_valid_address(buffer,found_address);
